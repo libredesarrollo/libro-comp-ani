@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:testcompani/components/animation_controller_example.dart';
+import 'package:testcompani/components/button_animated.dart';
 import 'package:testcompani/components/button_load.dart';
 import 'package:testcompani/components/button_slide.dart';
 import 'package:testcompani/components/drawer.dart';
 import 'package:testcompani/components/expanded_component.dart';
+import 'package:testcompani/components/product_preview.dart';
+import 'package:testcompani/components/progress_bar.dart';
+import 'package:testcompani/components/select_wheel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +36,7 @@ class MyApp extends StatelessWidget {
       // home: Scaffold(appBar: AppBar(), body: ButtonLoad()),
       home: Scaffold(
         appBar: AppBar(),
-        body: ButtonLoad(),
+        body: AnimationControllerExample(),
         drawer: MyDrawer(),
       ),
     );
