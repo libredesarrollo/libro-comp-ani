@@ -12,12 +12,18 @@ import 'package:testcompani/components/product_preview.dart';
 import 'package:testcompani/components/progress_bar.dart';
 import 'package:testcompani/components/select_wheel.dart';
 import 'package:testcompani/components/menu_bar.dart' as mb;
+import 'package:testcompani/components/sliver_widgets_example.dart';
 
-void main() => runApp(ChangeNotifierProvider(
-      // create: (_) => new LayoutModel(),
-      create: (_) => mb.MenuBarModel(),
-      child: MyApp(),
-    ));
+// void main() => runApp(ChangeNotifierProvider(
+//       // create: (_) => new LayoutModel(),
+//       create: (_) => mb.MenuBarModel(),
+//       // child: MyApp(),
+//       child: MyApp(),
+//     ));
+
+void main() {
+  runApp(const WhatsAppAppbar());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -61,7 +67,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(),
         // body: CustomGrid(),
         // body: mb.MenuBar(items: items),
-        body: ListMenuBar(),
+        body: SliverWidgetsAnimateExample(),
         drawer: MyDrawer(),
       ),
     );
