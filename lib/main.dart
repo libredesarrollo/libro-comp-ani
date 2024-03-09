@@ -7,23 +7,25 @@ import 'package:testcompani/components/button_slide.dart';
 import 'package:testcompani/components/custom_grid.dart';
 import 'package:testcompani/components/drawer.dart';
 import 'package:testcompani/components/expanded_component.dart';
+import 'package:testcompani/components/gradient.dart';
 import 'package:testcompani/components/list_menu_bar.dart';
 import 'package:testcompani/components/product_preview.dart';
 import 'package:testcompani/components/progress_bar.dart';
+import 'package:testcompani/components/progress_circular.dart';
 import 'package:testcompani/components/select_wheel.dart';
 import 'package:testcompani/components/menu_bar.dart' as mb;
 import 'package:testcompani/components/sliver_widgets_example.dart';
 
-// void main() => runApp(ChangeNotifierProvider(
-//       // create: (_) => new LayoutModel(),
-//       create: (_) => mb.MenuBarModel(),
-//       // child: MyApp(),
-//       child: MyApp(),
-//     ));
+void main() => runApp(ChangeNotifierProvider(
+      // create: (_) => new LayoutModel(),
+      create: (_) => mb.MenuBarModel(),
+      // child: MyApp(),
+      child: MyApp(),
+    ));
 
-void main() {
-  runApp(const WhatsAppAppbar());
-}
+// void main() {
+//   runApp(const WhatsAppAppbar());
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -67,7 +69,9 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(),
         // body: CustomGrid(),
         // body: mb.MenuBar(items: items),
-        body: SliverWidgetsAnimateExample(),
+        // body: SliverWidgetsAnimateExample(),
+        // body: DemoRadialProgress(),
+        body: GradientPage(),
         drawer: MyDrawer(),
       ),
     );
