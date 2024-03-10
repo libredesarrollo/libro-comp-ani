@@ -10,13 +10,24 @@ class GradientPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: [Background(), Grid()],
+        children: [
+          Background(), /* Grid()*/
+        ],
       ),
     );
   }
 }
 
-class Background extends StatelessWidget {
+class Background extends StatefulWidget {
+  @override
+  State<Background> createState() => _BackgroundState();
+}
+
+class _BackgroundState extends State<Background>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
   final boxDecoration = const BoxDecoration(
       gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -25,29 +36,72 @@ class Background extends StatelessWidget {
           colors: [Colors.purple, Colors.deepPurple]));
 
   @override
+  void initState() {
+    super.initState();
+
+    _controller =
+        AnimationController(duration: const Duration(seconds: 2), vsync: this);
+    _animation = Tween<double>(begin: 0, end: 300).animate(_controller);
+    // _controller = AnimationController(
+    //   vsync: this,
+    //   duration: const Duration(seconds: 1),
+    // );
+    // _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+
+    _animation.addStatusListener((AnimationStatus status) {
+      if (status == AnimationStatus.completed) _controller.reverse();
+      if (status == AnimationStatus.dismissed) _controller.forward();
+    });
+
+    _controller.addListener(() {
+      print(_animation.value);
+      // print(_controller.value);
+    });
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Stack(
       children: [
         Container(decoration: boxDecoration),
-        Positioned(top: -100, left: -30, child: _BoxBgDecoration(200, 200)),
-        Positioned(
-            top: size.width * .3,
-            left: size.height * .5,
-            child: _BoxBgDecoration(50, 50)),
+
+        Positioned(top: 10, left: -30, child: _BoxBgDecoration(200, 200)),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          // height: 300,
+          width: 300,
+          height: _animation.value + 10,
+          // width: _animation.value,
+          child: const FlutterLogo(),
+        ),
+        // Positioned(
+        //     top: size.width * .3,
+        //     left: size.height * .5,
+        //     child: _BoxBgDecoration(50, 50)),
         Positioned(
             top: size.width * .7,
             left: size.height * .6,
-            child: _BoxBgDecoration(50, 50)),
+            child: RotationTransition(
+                turns: Tween(begin: 0.0, end: .1).animate(_controller),
+                child: _BoxBgDecoration(50, 50))),
         Positioned(
             top: size.width * .5,
-            left: size.height * .4,
+            left: size.height * .4 * _controller.value,
             child: _BoxBgDecoration(50, 50)),
-        Positioned(
-            top: size.width * .8,
-            left: size.height * .1,
-            child: _BoxBgDecoration(50, 50)),
+        // Positioned(
+        //     top: size.width * .8,
+        //     left: size.height * .1,
+        //     child: _BoxBgDecoration(50, 50)),
       ],
     );
   }

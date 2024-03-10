@@ -24,7 +24,6 @@ class _AnimationControllerExampleState extends State<AnimationControllerExample>
     _controller.forward();
 
     _animation.addStatusListener((AnimationStatus status) {
-      print(status);
       if (status == AnimationStatus.completed) _controller.reverse();
       if (status == AnimationStatus.dismissed) _controller.forward();
     });
