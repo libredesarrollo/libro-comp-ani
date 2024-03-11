@@ -55,6 +55,9 @@ class _BackgroundState extends State<Background>
 
     _controller.addListener(() {
       print(_animation.value);
+
+      setState(() {});
+
       // print(_controller.value);
     });
 
@@ -79,9 +82,8 @@ class _BackgroundState extends State<Background>
         Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
           // height: 300,
-          width: 300,
           height: _animation.value + 10,
-          // width: _animation.value,
+          width: _animation.value,
           child: const FlutterLogo(),
         ),
         // Positioned(
